@@ -48,7 +48,7 @@ cd src/
 python setup.py build_ext
 pip install .
 
-de ../../../ # should be back in repository root
+cd ../../../ # should be back in repository root
 pip install -e ai-research-keyphrase-extraction/
 
 # install PKE

@@ -5,6 +5,7 @@ from __future__ import absolute_import
 
 from pke.unsupervised.graph_based.topicrank import TopicRank
 from pke.unsupervised.graph_based.singlerank import SingleRank
+from pke.unsupervised.graph_based.singlerankgrammar import SingleRankGrammar
 from pke.unsupervised.graph_based.multipartiterank import MultipartiteRank
 from pke.unsupervised.graph_based.positionrank import PositionRank
 from pke.unsupervised.graph_based.single_tpr import TopicalPageRank
