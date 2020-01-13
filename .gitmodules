@@ -1,0 +1,3 @@
+[submodule "ai-research-keyphrase-extraction"]
+	path = ai-research-keyphrase-extraction
+	url = https://github.com/swisscom/ai-research-keyphrase-extraction.git

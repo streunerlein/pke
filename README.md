@@ -1,14 +1,15 @@
-# `pke` - python keyphrase extraction
+# `pke` - python keyphrase extraction with EmbedRank++
 
-`pke` is an **open source** python-based **keyphrase extraction** toolkit. It
-provides an end-to-end keyphrase extraction pipeline in which each component can
-be easily modified or extended to develop new models. `pke` also allows for 
-easy benchmarking of state-of-the-art keyphrase extraction models, and 
-ships with supervised models trained on the
-[SemEval-2010 dataset](http://aclweb.org/anthology/S10-1004).
+This is a modified version of Florian Boudin's PKE toolkit for Keyphrase Extraction: https://github.com/boudinfl/pke
 
-[![Build Status](https://travis-ci.org/boudinfl/pke.svg?branch=master)](https://travis-ci.org/boudinfl/pke)
+The modifications include two new models:
 
+ - SingleRank with grammar rules (SingleRankGram)
+ - Embedrank++ with custom keyphrase selection (https://github.com/swisscom/ai-research-keyphrase-extraction)
+
+```
+git clone --recursive [URL to Git repo]
+```
 ## Table of Contents
 
 * [Installation](#installation)
@@ -19,21 +20,52 @@ ships with supervised models trained on the
 
 ## Installation
 
-To pip install `pke` from github:
+Make sure to also clone the submodules (https://github.com/swisscom/ai-research-keyphrase-extraction):
 
 ```bash
-pip install git+https://github.com/boudinfl/pke.git
+git clone --recursive https://github.com/streunerlein/pke.git
 ```
 
-`pke` also requires external resources that can be obtained using:
+or update them afterwards:
 
 ```bash
-python -m nltk.downloader stopwords
-python -m nltk.downloader universal_tagset
+git submodule update --init
+```
+
+Then run in the repository directory:
+
+```bash
+# install EmbedRank project
+cd ai-research-keyphrase-extraction/
+
+# install sent2vc for EmbedRank project
+git clone https://github.com/epfml/sent2vec.git
+cd sent2vec/
+git checkout f827d014a473aa22b2fef28d9e29211d50808d48
+make
+pip install cython
+cd src/
+python setup.py build_ext
+pip install .
+
+de ../../../ # should be back in repository root
+pip install -e ai-research-keyphrase-extraction/
+
+# install PKE
+pip install -e .
+
+# install nltk data
+python -m nltk.downloader stopwords # PKE
+python -m nltk.downloader universal_tagset # PKE
+python -m nltk.downloader punkt # EmbedRank
+
+# spacy models for every language you would like to support
+python -m spacy download fr # download the french model
+python -m spacy download de # download the german model
 python -m spacy download en # download the english model
+
 ```
 
-As of April 2019, `pke` only supports Python 3.6+.
 
 ## Minimal example
 
