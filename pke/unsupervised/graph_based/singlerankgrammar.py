@@ -10,10 +10,14 @@ forces candidates to be weighted according to grammar rules as stated in the pap
 The idea is also found in the implementation of Single Topical PageRank (single_tpr.py),
 where the grammar "NP:{<ADJ>*<NOUN|PROPN>+}" (UD tagset) is used.
 
-* Xiaojun Wan and Jianguo Xiao.
-  Single Document Keyphrase Extraction Using Neighborhood Knowledge
-  Extraction.
-  *In Proceedings of the 23rd National Conference on Articial Intelligence* - Volume 2, AAAI'08, pages 855-860. AAAI Press, 2008.
+@inproceedings{Wan:2008:SDK:1620163.1620205,
+	Author = {Wan, Xiaojun and Xiao, Jianguo},
+	Booktitle = {Proceedings of the 23rd National Conference on Artificial Intelligence - Volume 2},
+	Pages = {855--860},
+	Publisher = {AAAI Press},
+	Series = {AAAI'08},
+	Title = {Single Document Keyphrase Extraction Using Neighborhood Knowledge},
+	Year = {2008}}
 """
 
 from __future__ import absolute_import

@@ -45,6 +45,7 @@ git checkout f827d014a473aa22b2fef28d9e29211d50808d48
 make
 pip install cython
 cd src/
+export MACOSX_DEPLOYMENT_TARGET=10.10 # if you're on mac
 python setup.py build_ext
 pip install .
 
