@@ -48,6 +48,12 @@ class MinimalCoreNLPReader(Reader):
 class RawTextReader(Reader):
     """Reader for raw text."""
 
+    nlps = {}
+
+    @staticmethod
+    def set_nlp(nlp, language):
+        RawTextReader.nlps[language] = nlp
+
     def __init__(self, language=None):
         """Constructor for RawTextReader.
 
@@ -70,8 +76,13 @@ class RawTextReader(Reader):
         """
 
         max_length = kwargs.get('max_length', 10**6)
-        nlp = spacy.load(self.language,
-                         max_length=max_length)
+
+        if self.language in RawTextReader.nlps:
+            nlp = RawTextReader.nlps[self.language]
+        else:
+            nlp = spacy.load(self.language,
+                            max_length=max_length)
+
         spacy_doc = nlp(text)
 
         sentences = []

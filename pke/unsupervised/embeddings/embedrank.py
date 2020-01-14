@@ -5,7 +5,6 @@
 """EmbedRank and EmbedRank++ using s2v keyphrase extraction model with grammar rules for extraction.
 
 This is basically a wrapper around the author's implementation on https://github.com/swisscom/ai-research-keyphrase-extraction
-but with a custom keyphrase extractor (see SingleRankGrammar).
 
 @article{DBLP:journals/corr/abs-1801-04470,
 	Author = {Kamil Bennani{-}Smires and Claudiu Musat and Martin Jaggi and Andreea Hossmann and Michael Baeriswyl},
@@ -160,11 +159,10 @@ class EmbedRank(LoadFile):
         """
 
         if N is None:
-            N = 10 # len(self.candidates)
+            N = len(self.candidates)
 
         (candidates, relevances, aliases) = self.MMRPhrase(embedding_distributor, self.text_obj, beta, N, alias_threshold=alias_threshold)
 
-        print(candidates, relevances)
         forms_keys = [(' '.join(self.candidates[u].surface_forms[0]).lower(), u) for u in self.candidates.keys()]
         forms = dict(zip([f[0] for f in forms_keys], [f[1] for f in forms_keys]))
         
