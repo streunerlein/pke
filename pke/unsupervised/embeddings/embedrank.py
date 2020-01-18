@@ -114,7 +114,7 @@ class EmbedRank(LoadFile):
 
         (candidates, relevances, aliases) = self.__MMRPhrase(embedding_distributor, self.text_obj, beta, N, alias_threshold=alias_threshold)
 
-        forms_keys = [(' '.join(self.candidates[u].surface_forms[1]).lower(), u) for u in self.candidates.keys()]
+        forms_keys = [(' '.join(self.candidates[u].surface_forms[0]).lower(), u) for u in self.candidates.keys()]
         forms = dict(zip([f[0] for f in forms_keys], [f[1] for f in forms_keys]))
         
         self.aliases = {}
