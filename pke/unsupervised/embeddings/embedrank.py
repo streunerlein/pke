@@ -117,10 +117,13 @@ class EmbedRank(LoadFile):
         forms_keys = [(' '.join(self.candidates[u].surface_forms[0]).lower(), u) for u in self.candidates.keys()]
         forms = dict(zip([f[0] for f in forms_keys], [f[1] for f in forms_keys]))
         
+        self.aliases = {}
+
         for i, form in enumerate(candidates):
             key = forms[form]
             if (key in self.candidates):
               self.weights[key] = relevances[i]
+              self.aliases[key] = aliases[i]
             else:
               logging.warning("Selected candidate not in candidates")
 

@@ -32,7 +32,7 @@ or update them afterwards:
 git submodule update --init
 ```
 
-Then run in the repository directory:
+Then run in the repository directory or simply execute `setup.sh` (use Python 3.6):
 
 ```bash
 # install EmbedRank project
@@ -43,13 +43,17 @@ git clone https://github.com/epfml/sent2vec.git
 cd sent2vec/
 git checkout f827d014a473aa22b2fef28d9e29211d50808d48
 make
-pip install cython
+pip uninstall Cython
+pip install Cython
 cd src/
 export MACOSX_DEPLOYMENT_TARGET=10.10 # if you're on mac
 python setup.py build_ext
 pip install .
 
-cd ../../../ # should be back in repository root
+cd ../../
+pip install -r requirements.txt
+
+cd .. # should be back in repository root
 pip install -e ai-research-keyphrase-extraction/
 
 # install PKE
