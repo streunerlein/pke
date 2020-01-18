@@ -5,6 +5,7 @@
 
 import xml.etree.ElementTree as etree
 import spacy
+import json
 
 from pke.data_structures import Document
 
@@ -44,6 +45,26 @@ class MinimalCoreNLPReader(Reader):
 
         return doc
 
+class JsonTextReader(Reader):
+    """Spacy JSON  Parser."""
+
+    def read(self, text, **kwargs):
+        obj = json.loads(text)
+
+        sentences = []
+        for sentence_id, s in enumerate(obj['sents']):
+            sentences.append({
+                "words": [u['t'] for u in s['tok']],
+                "lemmas": [u.get('l', '') for u in s['tok']],
+                "POS": [u['p'] for u in s['tok']],
+                "char_offsets": [(u['o'], u['o'] + len(u['t'])) for u in s['tok']]
+            })
+
+        doc = Document.from_sentences(sentences,
+                                      input_file=kwargs.get('input_file', None),
+                                      **kwargs)
+
+        return doc
 
 class RawTextReader(Reader):
     """Reader for raw text."""

@@ -5,7 +5,7 @@
 from collections import defaultdict
 
 from pke.data_structures import Candidate, Document
-from pke.readers import MinimalCoreNLPReader, RawTextReader
+from pke.readers import MinimalCoreNLPReader, RawTextReader, JsonTextReader
 
 from nltk.stem.snowball import SnowballStemmer
 from nltk import RegexpParser
@@ -87,6 +87,8 @@ class LoadFile(object):
         # initialize document
         doc = Document()
 
+        is_json = kwargs.get('is_json', False)
+
         if isinstance(input, string_types):
 
             # if input is an input file
@@ -108,8 +110,13 @@ class LoadFile(object):
 
             # if input is a string
             else:
-                parser = RawTextReader(language=language)
-                doc = parser.read(text=input, **kwargs)
+                if (is_json):
+                    # input is json
+                    parser = JsonTextReader()
+                    doc = parser.read(text=input, **kwargs)
+                else:
+                    parser = RawTextReader(language=language)
+                    doc = parser.read(text=input, **kwargs)
 
         elif getattr(input, 'read', None):
             # check whether it is a compressed CoreNLP document
