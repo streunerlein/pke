@@ -14,12 +14,11 @@ This is basically a wrapper around the author's implementation on https://github
 	Year = {2018}}
 """
 
-import warnings
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import warnings
 import numpy as np
 import logging
 
