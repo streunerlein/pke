@@ -170,7 +170,7 @@ class EmbedRank(LoadFile):
 
       if len(candidates) == 0:
           warnings.warn('No keyphrase extracted for this document')
-          return None, None, None
+          return [], [], []
 
       return _MMR(embdistrib, text_obj, candidates, X, beta, N, use_filtered, alias_threshold)
 
