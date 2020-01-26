@@ -168,7 +168,7 @@ class EmbedRank(LoadFile):
       """
       candidates, X = self.__extract_candidates_embedding_for_doc(embdistrib, text_obj)
 
-      if len(candidates) == 0:
+      if len(candidates) <= 1:
           warnings.warn('No keyphrase extracted for this document')
           return [], [], []
 
